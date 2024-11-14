@@ -52,7 +52,8 @@ app.use(express.json());
 //     });
 // });
 
-const mongoURL = "mongodb://97.74.85.118:27017/LoginDB";
+// const mongoURL = "mongodb://97.74.85.118:27017/LoginDB";
+const mongoURL = "mongodb://127.0.0.1:27017";
 
 // Mongoose connection with proper error handling
 mongoose.connect(mongoURL, {
