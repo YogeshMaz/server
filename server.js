@@ -29,51 +29,51 @@ app.use(helmet());
 app.use(morgan("dev"));
 app.use(express.json());
 
-// mongoose.connect("mongodb://localhost:27017/LoginDB");
+mongoose.connect("mongodb://localhost:27017/LoginDB");
 // mongoose.connect("mongodb://97.74.85.118:27017/LoginDB")
 
 
-// const UserSchema = new mongoose.Schema({
-//   Name: String,
-//   Email: String
-// })
-
-// const UserModel = mongoose.model("LoginReport", UserSchema, "LoginReport");
-
-// app.get("/getUsers", (req, res) => {
-//   UserModel.find({})
-//     .then(function(LoginReport){
-//       // console.log("Found LoginReports:", LoginReport);
-//       res.json(LoginReport);
-//     })
-//     .catch(function(err){
-//       console.log("Error finding LoginReports:", err); 
-//       res.status(500).send(err);
-//     });
-// });
-
-// const mongoURL = "mongodb://97.74.85.118:27017/LoginDB";
-const mongoURL = "mongodb://127.0.0.1:27017";
-
-// Mongoose connection with proper error handling
-mongoose.connect(mongoURL, {
-  useNewUrlParser: true, 
-  useUnifiedTopology: true
-})
-  .then(() => {
-    console.log("Connected to MongoDB successfully!");
-  })
-  .catch((err) => {
-    console.error("MongoDB connection error:", err);
-  });
-
-// Define Schema and Model
 const UserSchema = new mongoose.Schema({
   Name: String,
   Email: String
-});
+})
 
 const UserModel = mongoose.model("LoginReport", UserSchema, "LoginReport");
+
+app.get("/getUsers", (req, res) => {
+  UserModel.find({})
+    .then(function(LoginReport){
+      // console.log("Found LoginReports:", LoginReport);
+      res.json(LoginReport);
+    })
+    .catch(function(err){
+      console.log("Error finding LoginReports:", err); 
+      res.status(500).send(err);
+    });
+});
+
+// const mongoURL = "mongodb://97.74.85.118:27017/LoginDB";
+// const mongoURL = "mongodb://127.0.0.1:27017";
+
+// // Mongoose connection with proper error handling
+// mongoose.connect(mongoURL, {
+//   useNewUrlParser: true, 
+//   useUnifiedTopology: true
+// })
+//   .then(() => {
+//     console.log("Connected to MongoDB successfully!");
+//   })
+//   .catch((err) => {
+//     console.error("MongoDB connection error:", err);
+//   });
+
+// // Define Schema and Model
+// const UserSchema = new mongoose.Schema({
+//   Name: String,
+//   Email: String
+// });
+
+// const UserModel = mongoose.model("LoginReport", UserSchema, "LoginReport");
 
 // API to get users
 app.get("/getUsers", (req, res) => {
